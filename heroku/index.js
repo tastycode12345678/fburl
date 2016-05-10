@@ -55,7 +55,6 @@ app.post('/webhook/', function (req, res) {
     event = req.body.entry[0].messaging[i];
     sender = event.sender.id;
     if (event.message && event.message.text) {
-      showHeaderText(sender);
 	  text = getText(event.message.text);
       sendTextMessage(sender, text.substring(0, 200));
     }
@@ -105,10 +104,10 @@ function showHeaderText(sender){
         "elements": [{
           "title": "First card",
           "subtitle": "Element #1 of an hscroll",
-          "image_url": "http://messengerdemo.parseapp.com/img/rift.png",
+          "image_url": "http://www.extentia.com/wp-content/uploads/2015/03/logo.png",
           "buttons": [{
             "type": "web_url",
-            "url": "https://www.messenger.com/",
+            "url": "https://www.extentia.com/",
             "title": "Web url"
           }, {
             "type": "postback",
@@ -118,7 +117,7 @@ function showHeaderText(sender){
         },{
           "title": "Second card",
           "subtitle": "Element #2 of an hscroll",
-          "image_url": "http://messengerdemo.parseapp.com/img/gearvr.png",
+          "image_url": "http://www.extentia.com/wp-content/uploads/2015/03/logo.png",
           "buttons": [{
             "type": "postback",
             "title": "Postback",
