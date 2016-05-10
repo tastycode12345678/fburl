@@ -65,7 +65,7 @@ app.use(bodyParser.json());
 //var port_number = server.listen(process.env.PORT || 3000);
 app.listen(process.env.PORT || 3000);
 app.get('/webhook', (req, res) => {
-	console.log("Toekn "+verifyToken);
+	//console.log("Toekn "+verifyToken);
     if (req.query['hub.verify_token'] === verifyToken) {
         return res.send(req.query['hub.challenge']);
     }
