@@ -62,8 +62,8 @@ const verifyToken = process.env.APP_VERIFY_TOKEN;
 const app = express();
 app.use(bodyParser.json());
 
-var port_number = server.listen(process.env.PORT || 3000);
-app.listen(port_number);
+//var port_number = server.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000);
 app.get('/webhook', (req, res) => {
 	console.log("Toekn "+verifyToken);
     if (req.query['hub.verify_token'] === verifyToken) {
