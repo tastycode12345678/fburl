@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var request = require('request');
 var app = express();
-var token = "";
+var token = "1051172898290895";
 
 app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'));
