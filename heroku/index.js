@@ -66,7 +66,7 @@ app.get('/webhook', (req, res) => {
     if (req.query['hub.verify_token'] === verifyToken) {
         return res.send(req.query['hub.challenge']);
     }
-    res.send('Error, wrong validation token');
+    res.send('Error, token');
 });
 
 app.post('/webhook', (req, res) => {
