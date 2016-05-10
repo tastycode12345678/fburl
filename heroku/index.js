@@ -2,7 +2,7 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
-let token = process.env.APP_PAGE_TOKEN;
+var token = process.env.APP_PAGE_TOKEN;
 
 app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'));
