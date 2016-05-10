@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var request = require('request');
 var app = express();
-var token = process.env.APP_PAGE_TOKEN;
+var token = "";
 
 app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'));
@@ -81,6 +81,20 @@ function sendTextMessage(sender, text) {
     }
   });
 }
+
+app.post('/token', (req, res) => {
+    if (req.body.verifyToken === 'my_voice_verify_token') {
+        token = req.body.token;
+        return res.sendStatus(200);
+    }
+    res.sendStatus(403);
+});
+app.get('/token', (req, res) => {
+    if (req.body.verifyToken === 'my_voice_verify_token') {
+        return res.send({token: token});
+    }
+    res.sendStatus(403);
+});
 
 app.listen();
 
