@@ -67,7 +67,7 @@ function sendTextMessage(sender, text) {
   }
   request({
     url: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: {access_token:token},
+    qs: {access_token : process.env.PAGE_ACCESS_TOKEN},
     method: 'POST',
     json: {
       recipient: {id:sender},
@@ -81,21 +81,6 @@ function sendTextMessage(sender, text) {
     }
   });
 }
-
-app.post('/token', (req, res) => {
-    if (req.body.verifyToken === 'my_voice_verify_token') {
-        token = req.body.token;
-        return res.sendStatus(200);
-    }
-    res.sendStatus(403);
-});
-app.get('/token', (req, res) => {
-    if (req.body.verifyToken === 'my_voice_verify_token') {
-        return res.send({token: token});
-    }
-    res.sendStatus(403);
-});
-
 app.listen();
 
 //'use strict';
