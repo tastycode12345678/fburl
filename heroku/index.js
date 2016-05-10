@@ -53,7 +53,7 @@ app.listen();*/
 // https://developers.facebook.com/docs/messenger-platform/quickstart
 
 const express = require('express');
-const request = require('superagent');
+//const request = require('superagent');
 const bodyParser = require('body-parser');
 
 let pageToken = process.env.APP_PAGE_TOKEN;
@@ -77,20 +77,21 @@ app.post('/webhook', (req, res) => {
 
         if (event.postback) {
             const text = JSON.stringify(event.postback).substring(0, 200);
-            sendTextMessage(sender, 'Postback received: ' + text);
+            //sendTextMessage(sender, 'Postback received: ' + text);
         } else if (event.message && event.message.text) {
             const text = event.message.text.trim().substring(0, 200);
 
             if (text.toLowerCase() === 'generic') {
                 sendGenericMessage(sender);
             } else {
-                sendTextMessage(sender, 'Text received, echo: ' + text);
+                //sendTextMessage(sender, 'Text received, echo: ' + text);
             }
         }
     });
 
     res.sendStatus(200);
 });
+
 
 function sendMessage (sender, message) {
     request
@@ -110,7 +111,7 @@ function sendMessage (sender, message) {
             }
         });
 }
-
+/*
 function sendTextMessage (sender, text) {
     sendMessage(sender, {
         text: text
@@ -167,5 +168,5 @@ app.get('/token', (req, res) => {
     }
     res.sendStatus(403);
 });
-
+*/
 app.listen(3000);
