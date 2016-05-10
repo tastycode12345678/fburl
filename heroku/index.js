@@ -55,7 +55,7 @@ app.post('/webhook/', function (req, res) {
     event = req.body.entry[0].messaging[i];
     sender = event.sender.id;
     if (event.message && event.message.text) {
-	  text = getText(event.message.text);
+	  text = getText(sender,event.message.text);
       sendTextMessage(sender, text.substring(0, 200));
     }
   }
@@ -83,7 +83,7 @@ function sendTextMessage(sender, text) {
   });
 }
 
-function getText(text){
+function getText(sender,text){
 	var data;
 	if(text.match("Hi, are you a bot?")){
 		data = "Of course! My name is Extentia";
@@ -92,6 +92,7 @@ function getText(text){
 	}else{
 		data = text;
 	}
+	showHeaderText(sender);
 	return data;
 }
 
