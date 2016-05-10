@@ -50,12 +50,12 @@ app.get('/webhook/', function (req, res) {
 })
 
 app.post('/webhook/', function (req, res) {
-	displayHomeScreen();
   messaging_events = req.body.entry[0].messaging;
   for (i = 0; i < messaging_events.length; i++) {
     event = req.body.entry[0].messaging[i];
     sender = event.sender.id;
     if (event.message && event.message.text) {
+	displayHomeScreen(sender);
 	  text = getText(sender,event.message.text);
       sendTextMessage(sender, text.substring(0, 200));
     }
@@ -146,7 +146,7 @@ function showHeaderText(sender){
   });
 }
 
-function displayHomeScreen(){
+function displayHomeScreen(sender){
 	messageData =  {
 		"setting_type":"call_to_actions",
 		"thread_state":"new_thread",
