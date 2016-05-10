@@ -2,6 +2,7 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
+let token = process.env.APP_PAGE_TOKEN;
 
 app.set('port', (process.env.PORT || 5000));
 app.listen(app.get('port'));
@@ -53,11 +54,32 @@ app.post('/webhook/', function (req, res) {
     sender = event.sender.id;
     if (event.message && event.message.text) {
       text = event.message.text;
-      // Handle a text message from this sender
+      sendTextMessage(sender, "Text received, echo: "+ text.substring(0, 200));
     }
   }
   res.sendStatus(200);
 });
+
+function sendTextMessage(sender, text) {
+  messageData = {
+    text:text
+  }
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+      recipient: {id:sender},
+      message: messageData,
+    }
+  }, function(error, response, body) {
+    if (error) {
+      console.log('Error sending message: ', error);
+    } else if (response.body.error) {
+      console.log('Error: ', response.body.error);
+    }
+  });
+}
 
 app.listen();
 
