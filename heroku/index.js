@@ -1,4 +1,5 @@
-/*var bodyParser = require('body-parser');
+var http = require('http');
+var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
 
@@ -12,7 +13,7 @@ app.get('/', function(req, res) {
   res.send('It works!');
 });
 
-/*app.get(['/facebook', '/instagram'], function(req, res) {
+app.get(['/facebook', '/instagram'], function(req, res) {
   if (
     req.param('hub.mode') == 'subscribe' &&
     req.param('hub.verify_token') == 'token'
@@ -45,14 +46,14 @@ app.get('/webhook/', function (req, res) {
   res.send('Error, wrong validation token');
 })
 
-app.listen();*/
+app.listen();
 
-'use strict';
+//'use strict';
 
 // Getting started with Facebook Messaging Platform
 // https://developers.facebook.com/docs/messenger-platform/quickstart
 
-const express = require('express');
+/*const express = require('express');
 //const request = require('superagent');
 const bodyParser = require('body-parser');
 
