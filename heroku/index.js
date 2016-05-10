@@ -164,7 +164,7 @@ function displayHomeScreen(){
 			receipient: {id:sender},
 			message: messageData,
 		}
-	}, functiion(error, response, body){
+	}, function(error, response, body){
 		if(error){
 			console.log('Error showing welcome screen: ',error);
 		}else if(response.body.error){
