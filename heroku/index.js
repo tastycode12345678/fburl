@@ -67,16 +67,6 @@ app.post('/webhook/', function (req, res) {
   res.sendStatus(200);
 });
 
-function parsePostbackData(api){
-	request({
-		url: api,
-		method: POST,
-		json:{
-			{"device_Id":"1","program_Id":"2","client_Id":"1"}
-		}
-	});
-}
-
 function sendTextMessage(sender, text) {
   messageData = {
     text:text
