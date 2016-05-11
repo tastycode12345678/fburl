@@ -147,7 +147,7 @@ function showHeaderText(sender){
 }
 
 function displayHomeScreen(){
-	messageData =  {
+	messageData =  
 		"setting_type":"call_to_actions",
 		"thread_state":"new_thread",
 		"call_to_actions":[
@@ -156,8 +156,7 @@ function displayHomeScreen(){
 					"text":"Welcome to My Company!"
 				}
 			}
-		]
-	};
+		];
 	request({
 		url: 'https://graph.facebook.com/v2.6/1751527525083725/thread_settings',
 		qs:{access_token:process.env.PAGE_ACCESS_TOKEN},
