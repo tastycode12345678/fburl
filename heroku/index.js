@@ -55,7 +55,7 @@ app.post('/webhook/', function (req, res) {
 		event = req.body.entry[0].messaging[i];
 		sender = event.sender.id;
 		 if (event.postback) {
-			text = JSON.stringify(event.postback);
+			text = JSON.stringify(event.postback.payload);
 			sendTextMessage(sender, "Postback received: "+text.substring(0, 200));
 			continue;
 		}	
@@ -66,6 +66,16 @@ app.post('/webhook/', function (req, res) {
 	}
   res.sendStatus(200);
 });
+
+function parsePostbackData(api){
+	request({
+		url: api,
+		method: POST,
+		json:{
+			{"device_Id":"1","program_Id":"2","client_Id":"1"}
+		}
+	});
+}
 
 function sendTextMessage(sender, text) {
   messageData = {
@@ -97,7 +107,7 @@ function getText(sender,text){
 	}else{
 		data = text;
 	}
-	showHeaderText(sender);
+	//showHeaderText(sender);
 	return data;
 }
 
