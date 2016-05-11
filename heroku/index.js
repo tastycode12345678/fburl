@@ -50,8 +50,7 @@ app.get('/webhook/', function (req, res) {
 })
 
 app.post('/webhook/', function (req, res) {
-	displayHomeScreen();
-	/*messaging_events = req.body.entry[0].messaging;
+	messaging_events = req.body.entry[0].messaging;
 	for (i = 0; i < messaging_events.length; i++) {
 		event = req.body.entry[0].messaging[i];
 		sender = event.sender.id;
@@ -59,7 +58,7 @@ app.post('/webhook/', function (req, res) {
 			text = getText(sender,event.message.text);
 			sendTextMessage(sender, text.substring(0, 200));
 		}
-	}*/
+	}
   res.sendStatus(200);
 });
 
@@ -144,34 +143,6 @@ function showHeaderText(sender){
       console.log('Error: ', response.body.error);
     }
   });
-}
-
-function displayHomeScreen(){
-	messageData =  {
-		"setting_type":"call_to_actions",
-		"thread_state":"new_thread",
-		"call_to_actions":[
-			{
-				"message":{
-					"text":"Welcome to My Company!"
-				}
-			}
-		]
-	};
-	request({
-		url: 'https://graph.facebook.com/v2.6/1751527525083725/thread_settings',
-		qs:{access_token:process.env.PAGE_ACCESS_TOKEN},
-		method: 'POST',
-		json: {
-			message: messageData,
-		}
-	}, function(error, response, body){
-		if(error){
-			console.log('Error showing welcome screen: ',error);
-		}else if(response.body.error){
-			console.log('Error: ', response.body.error);
-		}
-	});
 }
 
 app.listen();
