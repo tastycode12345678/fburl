@@ -16,7 +16,7 @@ app.get('/', function(req, res) {
   res.send('It works!');
 });
 
-app.get(['/facebook', '/instagram'], function(req, res) {
+/*app.get(['/facebook', '/instagram'], function(req, res) {
   if (
     req.param('hub.mode') == 'subscribe' &&
     req.param('hub.verify_token') == 'token'
@@ -39,7 +39,7 @@ app.post('/instagram', function(req, res) {
   console.log(req.body);
   // Process the Instagram updates here
   res.sendStatus(200);
-});
+});*/
 
 app.get('/webhook/', function (req, res) {
   if (req.query['hub.verify_token'] === 'my_voice_verify_token') {
@@ -54,6 +54,11 @@ app.post('/webhook/', function (req, res) {
 	for (i = 0; i < messaging_events.length; i++) {
 		event = req.body.entry[0].messaging[i];
 		sender = event.sender.id;
+		 if (event.postback) {
+			text = JSON.stringify(event.postback);
+			sendTextMessage(sender, "Postback received: "+text.substring(0, 200));
+			continue;
+		}	
 		if (event.message && event.message.text) {
 			text = getText(sender,event.message.text);
 			sendTextMessage(sender, text.substring(0, 200));
